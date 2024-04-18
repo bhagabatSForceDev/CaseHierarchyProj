@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Child Cases" icon-name="standard:case">
+    <template lwc:if={isLoading}>
+        <lightning-spinner variant="base" size="small"></lightning-spinner>
+    </template>
+    <template lwc:elseif={noChildCases}>
+        <div class="slds-p-around_large">
+            {userMessage}
+        </div>
+    </template>
+    <template lwc:elseif={isError}>
+        <div class="slds-p-around_large">
+            {userMessage}
+        </div>
+    </template>
+    <template lwc:else>
+    <div class="slds-p-around_medium">
+        <lightning-tree-grid
+            class="tree-grid"
+            columns={columns}
+            data={caseItems}
+            key-field="Id"
+            hide-checkbox-column
+        ></lightning-tree-grid>
+    </div>
+    </template>
+    
+</lightning-card>
+</template>
