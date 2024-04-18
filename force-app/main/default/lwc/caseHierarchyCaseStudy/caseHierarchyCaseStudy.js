@@ -38,7 +38,6 @@ export default class CaseHierarchyCaseStudy extends LightningElement {
         {label: 'Origin',fieldName: 'origin',type: 'text'}];
 
         renderedCallback(){
-            console.log('Called RENDEREDCALLBACK');
             loadStyle(this, caseHierarchyCss).then(()=>{
                 console.log('CSS LOADED');
             });
@@ -50,7 +49,6 @@ export default class CaseHierarchyCaseStudy extends LightningElement {
             this.caseItems = result.data.childCases.map((ele)=>{
                 return this.handleItemCreation(ele);
             });
-            console.log('Case Item Data: '+JSON.stringify(this.caseItems));
             this.isLoading=false;
             }else if(result.error){
                 console.error(JSON.stringify(result.error));
@@ -61,17 +59,13 @@ export default class CaseHierarchyCaseStudy extends LightningElement {
         }
 
         handleItemCreation(item){
-            console.log('INSIDE Item->'+JSON.stringify(item));
             let retItem = {caseNumber: item.caseInst.CaseNumber, caseLink: '/'+item.caseInst.Id, subject: item.caseInst.Subject, origin: item.caseInst.Origin, Id: item.caseInst.Id};
             if(item.childCases && item.childCases.length != 0){
                 console.log()
                 retItem = {...retItem, _children: item.childCases.map((ele)=>{
                     return this.handleItemCreation(ele);
                 })};
-            }else{
-                retItem = {...retItem, items: []};
             }
-            console.log('Finally Ret Item: '+JSON.stringify(retItem));
             return retItem;
         }
 

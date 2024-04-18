@@ -1,0 +1,11 @@
+lightning-tree-grid lightning-primitive-treegrid-cell-toggle > button > lightning-primitive-icon {
+    display: none;
+}
+
+lightning-tree-grid lightning-primitive-treegrid-cell-toggle > button[title^="Expand"]::before {
+    content: "[+]";
+}
+
+lightning-tree-grid lightning-primitive-treegrid-cell-toggle > button[title^="Collapse"]::before {
+    content: "[-]";
+}
